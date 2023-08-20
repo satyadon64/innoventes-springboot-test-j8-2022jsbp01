@@ -6,6 +6,8 @@ import java.util.Set;
 import com.innoventes.test.app.dto.CompanyDTO;
 import com.innoventes.test.app.entity.Company;
 
+import javax.validation.Valid;
+
 public interface CompanyMapper {
 
 	CompanyDTO getCompanyDTO(Company entity);
@@ -14,5 +16,5 @@ public interface CompanyMapper {
 
 	Set<CompanyDTO> getCompanyDTOSet(Set<Company> entitySet);
 
-	Company getCompany(CompanyDTO dto);
+	Company getCompany( CompanyDTO dto);
 }

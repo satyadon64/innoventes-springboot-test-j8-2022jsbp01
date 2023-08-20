@@ -10,6 +10,8 @@ import org.springframework.stereotype.Component;
 import com.innoventes.test.app.dto.CompanyDTO;
 import com.innoventes.test.app.entity.Company;
 
+import javax.validation.Valid;
+
 @Component
 public class CompanyMapperImpl implements CompanyMapper {
 
@@ -22,7 +24,7 @@ public class CompanyMapperImpl implements CompanyMapper {
 		dto.setEmail(entity.getEmail());
 		dto.setStrength(entity.getStrength());
 		dto.setWebSiteURL(entity.getWebSiteURL());
-		
+		dto.setCompanyCode(entity.getCompanyCode());
 		return dto;
 	}
 
@@ -57,7 +59,7 @@ public class CompanyMapperImpl implements CompanyMapper {
 		entity.setEmail(dto.getEmail());
 		entity.setStrength(dto.getStrength());
 		entity.setWebSiteURL(dto.getWebSiteURL());
-		
+		entity.setCompanyCode(dto.getCompanyCode());
 		return entity;
 	}
 

@@ -2,7 +2,10 @@ package com.innoventes.test.app.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import com.innoventes.test.app.dto.CompanyDTO;
+import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -52,5 +55,43 @@ public class CompanyServiceImpl implements CompanyService {
 						String.format(serviceHelper.getLocalizedMessage(ApplicationErrorCodes.COMPANY_NOT_FOUND), id),
 						ApplicationErrorCodes.COMPANY_NOT_FOUND));
 		companyRepository.deleteById(existingCompanyRecord.getId());
+	}
+	public Company getCompanyByiD(long id){
+		Company company = companyRepository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException(
+						String.format(serviceHelper.getLocalizedMessage(ApplicationErrorCodes.COMPANY_NOT_FOUND), id),
+						ApplicationErrorCodes.COMPANY_NOT_FOUND));
+		return company;
+	}
+
+	@Override
+	public Company getCompanyByCompanyCode(String companyCode) {
+		Company company = companyRepository.findByCompanyCode(companyCode);
+		return company;
+	}
+
+	@Override
+	public Company updateCompanyByPatchMethod(long id, Map<String, Object> updates) {
+		Company company = companyRepository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException(
+						String.format(serviceHelper.getLocalizedMessage(ApplicationErrorCodes.COMPANY_NOT_FOUND), id),
+						ApplicationErrorCodes.COMPANY_NOT_FOUND));
+
+		if (updates.containsKey("companyName")) {
+			company.setCompanyName((String) updates.get("companyName"));
+		}
+		if (updates.containsKey("email")) {
+			company.setEmail((String) updates.get("email"));
+		}
+		if (updates.containsKey("strength")) {
+			company.setStrength((Integer) updates.get("strength"));
+		}
+		if (updates.containsKey("webSiteURL")) {
+			company.setWebSiteURL((String) updates.get("webSiteURL"));
+		}
+		if (updates.containsKey("companyCode")) {
+			company.setCompanyCode((String) updates.get("companyCode"));
+		}
+		return company;
 	}
 }

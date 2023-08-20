@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.PositiveOrZero;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -30,15 +32,20 @@ public class Company extends BaseEntity {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "company_seq")
 	private Long id;
 
-	@Column(name = "company_name")
+	@Column(name = "company_name", nullable = false)
 	private String companyName;
 
-	@Column(name = "email")
+
+	@Column(name = "email", nullable = false)
 	private String email;
-	
+
+
 	@Column(name = "strength")
 	private Integer strength;
 	
-	@Column(name = "website_url")
+	@Column(name = "webSiteURL")
 	private String webSiteURL;
+
+	@Column(unique = true)
+	private String companyCode;
 }
